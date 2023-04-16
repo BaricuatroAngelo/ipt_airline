@@ -13,7 +13,9 @@ class HomePage extends StatelessWidget {
             'Book Your\nNext Flight',
             style: TextStyle(
               fontWeight: FontWeight.w900,
-              fontSize: 50,
+              fontSize: 35,
+              color: Colors.teal,
+              wordSpacing: 2.0,
             ),
           ),
         ],
