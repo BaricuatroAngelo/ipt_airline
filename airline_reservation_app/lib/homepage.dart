@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: const [
          Padding(
-            padding: EdgeInsets.only(right: 30.0, top: 40.0),
+            padding: EdgeInsets.only(left: 30.0, top: 40.0),
             child: Text(
               'Book Your\nNext Flight',
               style: TextStyle(
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
                 wordSpacing: 5.0,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
