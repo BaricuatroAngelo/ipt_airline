@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: const [
          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5.5),
+            padding: EdgeInsets.only(right: 30.0, top: 40.0),
             child: Text(
               'Book Your\nNext Flight',
               style: TextStyle(
