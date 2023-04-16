@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ToDoListScreen()));
+                      builder: (context) => const BlankPage()));
                 },
                 child: const Text(
                   "LOGIN",
