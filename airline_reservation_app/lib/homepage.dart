@@ -16,10 +16,6 @@ class HomePage extends StatelessWidget {
               height: 244,
               width: double.infinity,
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.blue, Colors.greenAccent]),
                 color: Colors.blue,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(50.0),
