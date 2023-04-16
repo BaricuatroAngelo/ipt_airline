@@ -1,5 +1,6 @@
 import 'package:airline_reservation_app/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class ToDoListScreen extends StatefulWidget {
   const ToDoListScreen({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
         backgroundColor: Colors.pink,
         tabs: [
           GButton(
-            icon: Icons.list,
+            icon: Icons.home,
             text: 'To-Do List',
             textColor: Colors.white,
             iconColor: Colors.white,
@@ -44,43 +45,6 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
             iconActiveColor: Colors.white54,
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) => SimpleDialog(
-              contentPadding: const EdgeInsets.all(20),
-              children: [
-                TextField(
-                  controller: model.inputController,
-                  decoration: const InputDecoration(
-                    hintText: "Type in what you want to do",
-                  ),
-                ),
-                TextField(
-                  controller: model.descController,
-                  decoration: const InputDecoration(
-                    hintText: "Description",
-                  ),
-                  minLines: 1,
-                  maxLines: null,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    model.add(ToDo(
-                      title: model.inputController.text,
-                      description: model.descController.text,
-                    ));
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Add"),
-                ),
-              ],
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

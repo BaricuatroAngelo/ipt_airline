@@ -1,3 +1,4 @@
+import 'package:airline_reservation_app/NavBars/HomePageNavBar.dart';
 import 'package:airline_reservation_app/homepage.dart';
 import 'package:airline_reservation_app/loginpage.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
       routes: {
-        '/home': (context)=>const HomePage(),
+        '/home': (context)=>const ToDoListScreen(),
       },
     );
   }
