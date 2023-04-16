@@ -83,19 +83,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 gradient:
                     const LinearGradient(colors: [Colors.blue, Colors.green]),
               ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const BlankPage()));
-                },
-                child: const Text(
-                  "LOGIN",
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.white,
+              child: Center(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const BlankPage()));
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 40,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
+              )
             ),
           ),
           const SizedBox(
