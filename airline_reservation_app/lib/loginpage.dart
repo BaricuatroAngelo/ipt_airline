@@ -9,8 +9,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen>{
-
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +85,8 @@ class _LoginScreenState extends State<LoginScreen>{
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ToDoListScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ToDoListScreen()));
                 },
                 child: const Text(
                   "LOGIN",
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen>{
                   onPressed: () {},
                   child: const Text(
                     "Register Account",
-                  ))
+                  )),
             ],
           ),
         ],

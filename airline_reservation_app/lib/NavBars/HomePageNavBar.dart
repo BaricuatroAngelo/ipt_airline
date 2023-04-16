@@ -13,7 +13,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
   int currentIndex = 0;
 
   static final List<Widget> screens = [
-    HomePage(),
+    const HomePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -29,7 +29,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       bottomNavigationBar: GNav(
         onTabChange: _onItemTapped,
         backgroundColor: Colors.pink,
-        tabs: [
+        tabs: const [
           GButton(
             icon: Icons.home,
             text: 'To-Do List',

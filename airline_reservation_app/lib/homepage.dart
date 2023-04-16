@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>{
                           height: 30,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: [
+                            children: const [
                               TripType(title: 'Round Trip'),
                               TripType(title: 'One-Way'),
                             ],
