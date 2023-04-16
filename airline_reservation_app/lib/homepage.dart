@@ -9,15 +9,18 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: const [
-          Text(
-            'Book Your\nNext Flight',
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 35,
-              color: Colors.teal,
-              wordSpacing: 2.0,
+         Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5.5),
+            child: Text(
+              'Book Your\nNext Flight',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 35,
+                color: Colors.teal,
+                wordSpacing: 5.0,
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
