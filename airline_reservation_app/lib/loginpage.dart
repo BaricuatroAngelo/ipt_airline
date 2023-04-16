@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'NavBars/HomePageNavBar.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -82,9 +84,9 @@ class _LoginScreenState extends State<LoginScreen>{
                 gradient:
                     const LinearGradient(colors: [Colors.blue, Colors.green]),
               ),
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/home');
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ToDoListScreen()));
                 },
                 child: const Text(
                   "LOGIN",

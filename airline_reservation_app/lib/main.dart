@@ -18,9 +18,6 @@ class MyApp extends StatelessWidget{
       ),
       debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
-      routes: {
-        '/home': (context)=>const ToDoListScreen(),
-      },
     );
   }
 }
