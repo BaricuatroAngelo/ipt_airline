@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'TripType.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
+  int currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +64,7 @@ class HomePage extends StatelessWidget {
                           height: 30,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: [
+                            children: const [
                               TripType(title: 'Round Trip'),
                               TripType(title: 'One-Way'),
                             ],

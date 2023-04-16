@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+import 'NavBars/HomePageNavBar.dart';
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +83,10 @@ class LoginScreen extends StatelessWidget {
                 gradient:
                     const LinearGradient(colors: [Colors.blue, Colors.green]),
               ),
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/home');
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ToDoListScreen()));
                 },
                 child: const Text(
                   "LOGIN",
@@ -113,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {},
                   child: const Text(
                     "Register Account",
-                  ))
+                  )),
             ],
           ),
         ],
