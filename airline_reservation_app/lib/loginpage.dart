@@ -10,14 +10,6 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Airline Reservation System",
-            style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.w900,
-              color: Colors.teal,
-            ),
-          ),
-          const Text(
             "Login Page",
             style: TextStyle(
               fontSize: 50,
@@ -26,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 25,
+            height: 30,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
