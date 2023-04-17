@@ -57,13 +57,6 @@ class _BlankPageState extends State<BlankPage> {
             iconActiveColor: Colors.white54,
           ),
           GButton(
-            icon: Icons.timer_sharp,
-            text: ' Recent',
-            textColor: Colors.white,
-            iconColor: Colors.white54,
-            iconActiveColor: Colors.white54,
-          ),
-          GButton(
             icon: Icons.settings,
             text: ' Downloads',
             textColor: Colors.white,
