@@ -36,7 +36,7 @@ class _BlankPageState extends State<BlankPage> {
         // rippleColor: Colors.blueAccent,
         tabBackgroundGradient: LinearGradient(colors: [
           Colors.blue,
-          Colors.green,
+          Colors.lightBlueAccent,
         ], stops: [
           0.5,
           1.1
@@ -64,7 +64,7 @@ class _BlankPageState extends State<BlankPage> {
             iconActiveColor: Colors.white54,
           ),
           GButton(
-            icon: Icons.download_rounded,
+            icon: Icons.settings,
             text: ' Downloads',
             textColor: Colors.white,
             iconColor: Colors.white54,
