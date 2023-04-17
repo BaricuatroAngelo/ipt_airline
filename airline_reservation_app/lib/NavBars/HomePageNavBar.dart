@@ -1,5 +1,6 @@
 import 'package:airline_reservation_app/homepage.dart';
 import 'package:airline_reservation_app/loginpage.dart';
+import 'package:airline_reservation_app/settingspage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -18,6 +19,7 @@ class _BlankPageState extends State<BlankPage> {
 
   static final List<Widget> screens = [
     HomePage(),
+    SettingsPage(),
   ];
 
   void _navigateBottomBar(int index) {
@@ -49,16 +51,16 @@ class _BlankPageState extends State<BlankPage> {
             iconColor: Colors.white54,
             iconActiveColor: Colors.white54,
           ),
-          GButton(
-            icon: Icons.thumb_up_alt,
-            text: ' Favorites',
-            textColor: Colors.white,
-            iconColor: Colors.white54,
-            iconActiveColor: Colors.white54,
-          ),
+          // GButton(
+          //   icon: Icons.thumb_up_alt,
+          //   text: ' Favorites',
+          //   textColor: Colors.white,
+          //   iconColor: Colors.white54,
+          //   iconActiveColor: Colors.white54,
+          // ),
           GButton(
             icon: Icons.settings,
-            text: ' Downloads',
+            text: ' Settings',
             textColor: Colors.white,
             iconColor: Colors.white54,
             iconActiveColor: Colors.white54,

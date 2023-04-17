@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex = 1;
 
   TextEditingController dateController = TextEditingController();
   TextEditingController arrivalController = TextEditingController();
