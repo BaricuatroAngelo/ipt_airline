@@ -13,13 +13,22 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black12,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Login Page",
+            "Airline Reservation",
             style: TextStyle(
-              fontSize: 50,
+              fontSize: 45,
+              fontWeight: FontWeight.w900,
+              color: Colors.teal,
+            ),
+          ),
+          const Text(
+            "System",
+            style: TextStyle(
+              fontSize: 45,
               fontWeight: FontWeight.w900,
               color: Colors.teal,
             ),
@@ -83,19 +92,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 gradient:
                     const LinearGradient(colors: [Colors.blue, Colors.green]),
               ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const BlankPage()));
-                },
-                child: const Text(
-                  "LOGIN",
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.white,
+              child: Center(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const BlankPage()));
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 40,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
+              )
             ),
           ),
           const SizedBox(

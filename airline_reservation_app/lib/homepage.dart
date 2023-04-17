@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage> {
   int currentIndex = 1;
 
   @override
@@ -48,12 +48,11 @@ class _HomePageState extends State<HomePage>{
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 200,right: 30,left: 30),
+                padding: const EdgeInsets.only(top: 200, right: 30, left: 30),
                 child: Container(
-                  alignment: Alignment.topCenter,
                   height: 500,
                   child: Container(
-                    padding: EdgeInsets.only(top: 15, left: 10),
+                    padding: const EdgeInsets.only(top: 15, left: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -67,10 +66,33 @@ class _HomePageState extends State<HomePage>{
                             children: const [
                               TripType(title: 'Round Trip'),
                               TripType(title: 'One-Way'),
+                              TripType(title: 'Multiway'),
                             ],
                           ),
                         ),
-                        Container(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: const [
+                                Text(
+                                  'From\n',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                Text(
+                                  'asdhaskdj',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
