@@ -13,24 +13,24 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.white70,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
             "Airline Reservation",
             style: TextStyle(
-              fontSize: 45,
+              fontSize: 40,
               fontWeight: FontWeight.w900,
-              color: Colors.teal,
+              color: Colors.blue,
             ),
           ),
           const Text(
             "System",
             style: TextStyle(
-              fontSize: 45,
+              fontSize: 40,
               fontWeight: FontWeight.w900,
-              color: Colors.teal,
+              color: Colors.blue,
             ),
           ),
           const SizedBox(

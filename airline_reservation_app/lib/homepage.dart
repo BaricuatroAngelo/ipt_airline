@@ -14,6 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String _selectedTripType = '';
+
+  void _onTripTypeSelected(String tripType) {
+    setState(() {
+      _selectedTripType = tripType;
+    });
+  }
 
   TextEditingController dateController = TextEditingController();
   TextEditingController arrivalController = TextEditingController();
@@ -46,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                         bottomRight: Radius.circular(50.0)),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 20, top: 45),
+                    padding: EdgeInsets.only(left: 20, top: 80),
                     child: Text(
                       'Book Your\nNext Flight',
                       style: TextStyle(
@@ -75,10 +82,22 @@ class _HomePageState extends State<HomePage> {
                           height: 30,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: const [
-                              TripType(title: 'Round Trip'),
-                              TripType(title: 'One-Way'),
-                              TripType(title: 'Multiway'),
+                            children: [
+                              TripType(
+                                title: 'Round Trip',
+                                selectedValue: _selectedTripType,
+                                onSelected: _onTripTypeSelected,
+                              ),
+                              TripType(
+                                title: 'One-Way',
+                                selectedValue: _selectedTripType,
+                                onSelected: _onTripTypeSelected,
+                              ),
+                              TripType(
+                                title: 'Multiway',
+                                selectedValue: _selectedTripType,
+                                onSelected: _onTripTypeSelected,
+                              ),
                             ],
                           ),
                         ),
@@ -174,76 +193,94 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
-                              child: Container(
-                                padding: EdgeInsets.only(left: 10),
-                                child: TextField(
-                                  decoration: const InputDecoration(
-                                    hintText: 'Enter Date',
-                                    hintStyle: TextStyle(color: Colors.grey),
-                                    border: InputBorder.none,
-                                  ),
-                                  controller: dateController,
-                                  readOnly: true,
-                                  onTap: () async {
-                                    DateTime? pickedDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(2000),
-                                        lastDate: DateTime(2101));
-                                    if (pickedDate != null) {
-                                      String formattedDate =
-                                      DateFormat("dd, MMM yyyy")
-                                          .format(pickedDate);
-
-                                      setState(() {
-                                        dateController.text =
-                                            formattedDate.toString();
-                                      });
-                                    } else {
-                                      print('No Date Selected');
-                                    }
-                                  },
+                                child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextField(
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter Date',
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
                                 ),
-                              )
-                            ),
+                                controller: dateController,
+                                readOnly: true,
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(2101));
+                                  if (pickedDate != null) {
+                                    String formattedDate =
+                                        DateFormat("dd, MMM yyyy")
+                                            .format(pickedDate);
+
+                                    setState(() {
+                                      dateController.text =
+                                          formattedDate.toString();
+                                    });
+                                  } else {
+                                    print('No Date Selected');
+                                  }
+                                },
+                              ),
+                            )),
                             Expanded(
-                              child: Container(
-                                padding: EdgeInsets.only(right: 10),
-                                child: TextField(
-                                  textAlign: TextAlign.end,
-                                  decoration: const InputDecoration(
-                                    hintText: 'Enter Date',
-                                    hintStyle: TextStyle(color: Colors.grey),
-                                    border: InputBorder.none,
-                                  ),
-                                  controller: arrivalController,
-                                  readOnly: true,
-                                  onTap: () async {
-                                    DateTime? pickedDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(2000),
-                                        lastDate: DateTime(2101));
-                                    if (pickedDate != null) {
-                                      String formattedDate =
-                                      DateFormat("dd, MMM yyyy")
-                                          .format(pickedDate);
-
-                                      setState(() {
-                                        arrivalController.text =
-                                            formattedDate.toString();
-                                      });
-                                    } else {
-                                      print('No Date Selected');
-                                    }
-                                  },
+                                child: Container(
+                              padding: EdgeInsets.only(right: 10),
+                              child: TextField(
+                                textAlign: TextAlign.end,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter Date',
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
                                 ),
-                              )
-                            ),
+                                controller: arrivalController,
+                                readOnly: true,
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(2101));
+                                  if (pickedDate != null) {
+                                    String formattedDate =
+                                        DateFormat("dd, MMM yyyy")
+                                            .format(pickedDate);
+
+                                    setState(() {
+                                      arrivalController.text =
+                                          formattedDate.toString();
+                                    });
+                                  } else {
+                                    print('No Date Selected');
+                                  }
+                                },
+                              ),
+                            )),
                           ],
                         ),
-                        Container(
-                          padding: EdgeInsets.only(left: 10, right: 10, top: 35),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 30, right: 30, top: 30),
+                          child: Container(
+                              height: 60,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: Colors.blue),
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: const Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 40,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )),
                         ),
                       ],
                     ),
