@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                         bottomRight: Radius.circular(50.0)),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 20, top: 45),
+                    padding: EdgeInsets.only(left: 20, top: 80),
                     child: Text(
                       'Book Your\nNext Flight',
                       style: TextStyle(
