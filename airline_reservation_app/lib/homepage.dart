@@ -242,8 +242,30 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        Container(
-                          padding: EdgeInsets.only(left: 10, right: 10, top: 35),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                          child: Container(
+                              height: 60,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.blue
+                              ),
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () {
+                                  },
+                                  child: const Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 40,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                          ),
                         ),
                       ],
                     ),
