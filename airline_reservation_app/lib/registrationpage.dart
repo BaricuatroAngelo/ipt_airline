@@ -14,21 +14,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _nameController = TextEditingController();
 
   Future<void> _register() async {
-    final url = 'http://.com/api/register/';
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'email': _emailController.text,
-        'password': _passwordController.text,
-        'name': _nameController.text,
-      }),
-    );
-
-    if (response.statusCode == 201) {
+    try {
+      await registerUser(
+          _emailController.text, _passwordController.text, _nameController.text);
       // Registration successful
       Navigator.of(context).pushReplacementNamed('/login');
-    } else {
+    } catch (e) {
       // Registration failed
       showDialog(
         context: context,
@@ -116,5 +107,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
       ),
     );
+  }
+}
+
+Future registerUser(String email, String password, String name) async {
+  final url = 'http://127.0.0.1:8000/api/register/';
+  final response = await http.post(
+    Uri.parse(url),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({
+      'email': email,
+      'password': password,
+      'name': name,
+    }),
+  );
+  if (response.statusCode == 201) {
+    // Registration successful
+    return true;
+  } else {
+    // Registration failed
+    throw Exception('Failed to register user');
   }
 }
