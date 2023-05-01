@@ -20,6 +20,6 @@ from api.views import register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('register/', register, name='register'),
+    path('/api/register/', register, name='register'),
 
 ]

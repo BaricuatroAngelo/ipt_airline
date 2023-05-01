@@ -1,25 +1,13 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
-from .models import User
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UserSerializer
 
 
+@api_view(['POST'])
 def register(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        name = request.POST['name']
-
-        if not email or not password or not name:
-            return JsonResponse({'error': 'All fields are required'})
-
-        try:
-            user = User.objects.create_user(email=email, password=password, name=name)
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
-
-        login(request, user)
-        return JsonResponse({'success': True})
-
-    return render(request, 'registration.html')
-
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
