@@ -1,3 +1,4 @@
+import 'package:airline_reservation_app/registrationpage.dart';
 import 'package:flutter/material.dart';
 
 import 'NavBars/HomePageNavBar.dart';
@@ -130,7 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RegistrationPage()));
+                  },
                   child: const Text(
                     "Register Account",
                   )),
