@@ -1,29 +1,25 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
+from .models import User
 
-# Create your views here.
 
-@csrf_exempt
 def register(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        
-        if User.objects.filter(email=email).exists():
-            response = JsonResponse({'success': False, 'message': 'Email already exists.'})
-            response.status_code = 409
-            return response
-        
-        user = User(username=email, email=email, first_name=name, password=make_password(password))
-        user.save()
-        response = JsonResponse({'success': True, 'message': 'Registration successful.'})
-        response.status_code = 201
-        return response
-    else:
-        response = JsonResponse({'success': False, 'message': 'Invalid request method.'})
-        response.status_code = 405
-        return response
+        email = request.POST['email']
+        password = request.POST['password']
+        name = request.POST['name']
+
+        if not email or not password or not name:
+            return JsonResponse({'error': 'All fields are required'})
+
+        try:
+            user = User.objects.create_user(email=email, password=password, name=name)
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+        login(request, user)
+        return JsonResponse({'success': True})
+
+    return render(request, 'registration.html')
+
