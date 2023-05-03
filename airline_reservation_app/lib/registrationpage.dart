@@ -4,40 +4,29 @@ import 'dart:convert';
 
 class RegistrationPage extends StatefulWidget {
   @override
-  _RegistrationPageState createState() => _RegistrationPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _register() async {
-    try {
-      await registerUser(
-          _emailController.text, _passwordController.text, _nameController.text);
-      // Registration successful
-      Navigator.of(context).pushReplacementNamed('/login');
-    } catch (e) {
-      // Registration failed
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Registration Failed'),
-            content: Text('An error occurred while trying to register.'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+  Future<void> _submit() async {
+    final String apiUrl = 'http://localhost:8000/users/';
+    final response = await http.post(Uri.parse(apiUrl), body: {
+      'username': _usernameController.text,
+      'email': _emailController.text,
+      'password': _passwordController.text,
+    });
+
+    final responseData = json.decode(response.body);
+    if (response.statusCode == 201) {
+      // registration successful
+      print('Registration successful!');
+    } else {
+      // registration failed
+      print(responseData['error']);
     }
   }
 
@@ -45,87 +34,39 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Registration Page'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                ),
-                controller: _emailController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your email address';
-                  }
-                  return null;
-                },
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                labelText: 'Username',
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                ),
-                obscureText: true,
-                controller: _passwordController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  return null;
-                },
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: 'Email',
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                ),
-                controller: _nameController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
+            ),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _register();
-                    }
-                  },
-                  child: Text('Register'),
-                ),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _submit,
+              child: Text('Submit'),
+            ),
+          ],
         ),
       ),
     );
-  }
-}
-
-Future registerUser(String email, String password, String name) async {
-  final url = 'http://127.0.0.1:8000/api/register/';
-  final response = await http.post(
-    Uri.parse(url),
-    headers: {'Content-Type': 'application/json'},
-    body: jsonEncode({
-      'email': email,
-      'password': password,
-      'name': name,
-    }),
-  );
-  if (response.statusCode == 201) {
-    // Registration successful
-    return true;
-  } else {
-    // Registration failed
-    throw Exception('Failed to register user');
   }
 }
