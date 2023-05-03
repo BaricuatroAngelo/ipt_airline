@@ -1,5 +1,3 @@
-import 'package:airline_reservation_app/main.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:intl/intl.dart';
