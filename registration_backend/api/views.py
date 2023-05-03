@@ -5,8 +5,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 
 
-class RegisteredUser(APIView):
-    def get(self, request):
+class UserList(APIView):
+    def get(self):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)

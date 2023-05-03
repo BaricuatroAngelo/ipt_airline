@@ -1,6 +1,6 @@
 from django.urls import path
-from api.views import RegisteredUser
+from api.views import UserList
 
 urlpatterns = [
-    path('api/users', RegisteredUser.as_view())
+    path('api/users', UserList.as_view())
 ]
