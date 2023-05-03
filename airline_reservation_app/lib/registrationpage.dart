@@ -79,7 +79,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     'Content-type': 'application/json',
                   };
 
-                  String url = 'http://127.0.0.1:8000/api/user';
+                  String url = 'http://127.0.0.1:8000/api/users';
 
                   http.post(Uri.parse(url),
                       headers: headers, body: jsonEncode(createdAcc.toJson()));
