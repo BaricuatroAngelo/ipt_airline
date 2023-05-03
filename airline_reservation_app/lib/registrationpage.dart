@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'account.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -79,7 +78,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Map<String, String> headers = {
                     'Content-type': 'application/json',
                   };
-                  
+
                   String url = 'http://127.0.0.1:8000/api/user';
 
                   http.post(Uri.parse(url),
