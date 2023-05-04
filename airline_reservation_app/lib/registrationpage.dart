@@ -74,7 +74,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Account newAccount = Account(
                       username: _usernameController.text,
                       password: _passwordController.text,
-                      email: _emailController.text);
+                      email: _emailController.text
+                  );
                   Map<String, String> headers = {
                     'Content-type': 'application/json',
                     'Accept': 'application/json',
