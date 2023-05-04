@@ -71,20 +71,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   );
                 } else {
-                  Account newAccount = Account(
+                  Account createdAcc = Account(
                       username: _usernameController.text,
                       password: _passwordController.text,
-                      email: _emailController.text
-                  );
+                      email: _emailController.text);
                   Map<String, String> headers = {
                     'Content-type': 'application/json',
-                    'Accept': 'application/json',
                   };
 
                   String url = 'http://127.0.0.1:8000/api/users';
 
                   http.post(Uri.parse(url),
-                      headers: headers, body: jsonEncode(newAccount.toJson()));
+                      headers: headers, body: jsonEncode(createdAcc.toJson()));
                   Navigator.pop(context);
                 }
               },
