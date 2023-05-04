@@ -21,13 +21,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   TextEditingController dateController = TextEditingController();
-  TextEditingController arrivalController = TextEditingController();
+  TextEditingController returnController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     dateController.text = "";
-    arrivalController.text = "";
+    returnController.text = "";
   }
 
   @override
@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Icon(Icons.calendar_today),
                               Text(
-                                'Arrive',
+                                'Return',
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),
@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                                   hintStyle: TextStyle(color: Colors.grey),
                                   border: InputBorder.none,
                                 ),
-                                controller: arrivalController,
+                                controller: returnController,
                                 readOnly: true,
                                 onTap: () async {
                                   DateTime? pickedDate = await showDatePicker(
@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                                             .format(pickedDate);
 
                                     setState(() {
-                                      arrivalController.text =
+                                      returnController.text =
                                           formattedDate.toString();
                                     });
                                   } else {
