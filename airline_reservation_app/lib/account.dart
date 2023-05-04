@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 
 class Account {
   final String username;
@@ -12,12 +11,13 @@ class Account {
     return Account(
         username: json['username'],
         password: json['password'],
-        email: json['email']);
+        email: json['email']
+    );
   }
 
   Map<String, dynamic> toJson() => {
     'username': username,
     'password': password,
-    'emial': email,
+    'email': email,
   };
 }
