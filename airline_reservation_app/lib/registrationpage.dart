@@ -77,6 +77,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       email: _emailController.text);
                   Map<String, String> headers = {
                     'Content-type': 'application/json',
+                    'Accept': 'application/json',
                   };
 
                   String url = 'http://127.0.0.1:8000/api/users';
