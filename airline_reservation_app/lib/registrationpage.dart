@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:async';
 import 'account.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -15,44 +14,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
-
-  Future<void> registerUser() async {
-    Account newAccount = Account(
-      username: _usernameController.text,
-      password: _passwordController.text,
-      email: _emailController.text,
-    );
-
-    http.post(
-      Uri.parse('http://127.0.0.1:8000/api/users'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(newAccount.toJson()),
-    )
-        .then((response) {
-      if (response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Registration successful'),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Registration failed'),
-          ),
-        );
-      }
-    }).catchError((error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error occurred: $error'),
-        ),
-      );
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +70,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       content: Text('Please fill all fields'),
                     ),
                   );
-
                 } else {
-                  registerUser();
+                  Account newAccount = Account(
+                      username: _usernameController.text,
+                      password: _passwordController.text,
+                      email: _emailController.text);
+                  Map<String, String> headers = {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json',
+                  };
+
+                  String url = 'http://127.0.0.1:8000/api/users';
+
+                  http.post(Uri.parse(url),
+                      headers: headers, body: jsonEncode(newAccount.toJson()));
                   Navigator.pop(context);
                 }
               },
