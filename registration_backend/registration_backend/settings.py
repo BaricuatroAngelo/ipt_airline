@@ -27,10 +27,11 @@ DEBUG = True
 
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8000",
-    "http://localhost:8000"
+    "http://localhost:8000",
+    "http://10.0.2.2:8000",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2']
 
 
 # Application definition
