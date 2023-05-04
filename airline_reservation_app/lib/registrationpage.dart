@@ -14,6 +14,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
+  final _fNameController = TextEditingController();
+  final _lNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,29 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _fNameController,
+              decoration: const InputDecoration(labelText: 'First Name'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your first name';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _lNameController,
+              decoration: const InputDecoration(labelText: 'Last Name'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your last name';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
             TextFormField(
               controller: _usernameController,
               decoration: const InputDecoration(labelText: 'Username'),
@@ -64,7 +89,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               onPressed: () {
                 if (_usernameController.text.isEmpty ||
                     _passwordController.text.isEmpty ||
-                    _emailController.text.isEmpty) {
+                    _emailController.text.isEmpty ||
+                    _fNameController.text.isEmpty ||
+                    _lNameController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Please fill all fields'),
@@ -73,13 +100,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 } else {
                   Account createdAcc = Account(
                       username: _usernameController.text,
+                      fName: _fNameController.text,
+                      lName: _lNameController.text,
                       password: _passwordController.text,
                       email: _emailController.text);
                   Map<String, String> headers = {
                     'Content-type': 'application/json',
+                    'Accept': 'application/json',
                   };
 
-                  String url = 'http://127.0.0.1:8000/api/user';
+                  String url = 'http://10.0.2.2:8000/api/users';
 
                   http.post(Uri.parse(url),
                       headers: headers, body: jsonEncode(createdAcc.toJson()));

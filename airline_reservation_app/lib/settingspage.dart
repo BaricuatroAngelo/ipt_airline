@@ -1,6 +1,8 @@
 import 'package:airline_reservation_app/loginpage.dart';
 import 'package:flutter/material.dart';
 
+import 'bookedflights.dart';
+
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -66,6 +68,17 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text('GBP'),
               trailing: _currency == 'GBP' ? const Icon(Icons.check) : null,
               onTap: () => _changeCurrency('GBP'),
+            ),
+            const Text(
+              'Flights',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            ListTile(
+              title: const Text('Booked Flights'),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const BookedFlights()));
+              },
             ),
             const Text(
               'Others',
