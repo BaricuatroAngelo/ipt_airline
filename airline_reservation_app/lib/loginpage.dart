@@ -22,6 +22,19 @@ class _LoginPageState extends State<LoginPage> {
   void _login() async {
     final username = _usernameController.text;
     final password = _passwordController.text;
+    if (username.isEmpty) {
+      setState(() {
+        _errorMessage = 'Please enter your username';
+      });
+      return;
+    }
+
+    if (password.isEmpty) {
+      setState(() {
+        _errorMessage = 'Please enter your password';
+      });
+      return;
+    }
     final endpoint = Uri.parse('http://10.0.2.2:8000/api/users');
     final response = await http.get(endpoint);
 
@@ -95,12 +108,6 @@ class _LoginPageState extends State<LoginPage> {
                 labelText: 'Username',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your username';
-                }
-                return null;
-              },
             ),
           ),
           const SizedBox(
@@ -115,12 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your password';
-                }
-                return null;
-              },
             ),
           ),
           const SizedBox(
