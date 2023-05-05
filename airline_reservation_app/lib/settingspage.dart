@@ -88,7 +88,7 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text('Logout'),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const LoginScreen()));
+                    builder: (context) => const LoginPage()));
               },
             )
           ],

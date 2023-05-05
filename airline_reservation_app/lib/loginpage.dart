@@ -1,33 +1,70 @@
+import 'dart:convert';
+
+import 'package:airline_reservation_app/NavBars/HomePageNavBar.dart';
 import 'package:airline_reservation_app/registrationpage.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-import 'NavBars/HomePageNavBar.dart';
-
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String? _errorMessage;
+
+  void _login() async {
+    final username = _usernameController.text;
+    final password = _passwordController.text;
+    final endpoint = Uri.parse('http://10.0.2.2:8000/api/users');
+    final response = await http.get(endpoint);
+
+    if (response.statusCode == 200) {
+      final users = jsonDecode(response.body);
+      final matchingUser = users.firstWhere(
+            (user) => user['username'] == username && user['password'] == password,
+        orElse: () => null,
+      );
+
+      if (matchingUser != null) {
+        // TODO: login successful, navigate to next screen
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const BlankPage()));
+      } else {
+        setState(() {
+          _errorMessage = 'Invalid username or password';
+        });
+      }
+    } else {
+      setState(() {
+        _errorMessage = 'Error: ${response.statusCode}';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70,
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Airline Reservation",
-            style: TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w900,
-              color: Colors.blue,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage
+              )
             ),
           ),
           const Text(
-            "System",
+            "Airline Reservation System",
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w900,
@@ -37,15 +74,28 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 30,
           ),
+          if (_errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                _errorMessage!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
             child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
+              controller: _usernameController,
               decoration: const InputDecoration(
-                labelText: "Enter Email",
+                labelText: 'Username',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter your username';
+                }
+                return null;
+              },
             ),
           ),
           const SizedBox(
@@ -54,31 +104,19 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
             child: TextFormField(
-              keyboardType: TextInputType.visiblePassword,
+              controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: "Enter Password",
+                labelText: 'Password',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: Icon(Icons.remove_red_eye),
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
             ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Forget Password?",
-                    )),
-              )
-            ],
           ),
           const SizedBox(
             height: 25,
@@ -91,14 +129,11 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 gradient:
-                    const LinearGradient(colors: [Colors.blue, Colors.green]),
+                const LinearGradient(colors: [Colors.blue, Colors.green]),
               ),
               child: Center(
                 child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const BlankPage()));
-                  },
+                  onTap: _login,
                   child: const Text(
                     'Login',
                     style: TextStyle(
@@ -108,15 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-              )
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Divider(
-            height: 30,
-            color: Colors.black,
           ),
           const SizedBox(
             height: 10,
@@ -131,17 +159,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const RegistrationPage()));
-                  },
-                  child: const Text(
-                    "Register Account",
-                  )),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const RegistrationPage(),
+                  ));
+                },
+                child: const Text(
+                  "Register Account",
+                ),
+              ),
             ],
           ),
         ],
       ),
     );
   }
+
 }
+
