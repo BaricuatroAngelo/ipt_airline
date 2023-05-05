@@ -86,7 +86,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_usernameController.text.isEmpty ||
                     _passwordController.text.isEmpty ||
                     _emailController.text.isEmpty ||
@@ -98,22 +98,49 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   );
                 } else {
-                  Account createdAcc = Account(
-                      username: _usernameController.text,
-                      fName: _fNameController.text,
-                      lName: _lNameController.text,
-                      password: _passwordController.text,
-                      email: _emailController.text);
                   Map<String, String> headers = {
                     'Content-type': 'application/json',
                     'Accept': 'application/json',
                   };
-
                   String url = 'http://10.0.2.2:8000/api/users';
-
-                  http.post(Uri.parse(url),
-                      headers: headers, body: jsonEncode(createdAcc.toJson()));
-                  Navigator.pop(context);
+                  var response = await http.get(Uri.parse(url), headers: headers);
+                  if (response.statusCode == 200) {
+                    var jsonResponse = jsonDecode(response.body);
+                    bool usernameExists = false;
+                    for (var user in jsonResponse) {
+                      if (user['username'] == _usernameController.text) {
+                        usernameExists = true;
+                        break;
+                      }
+                    }
+                    if (usernameExists) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Username already exists'),
+                        ),
+                      );
+                    } else {
+                      Account createdAcc = Account(
+                        username: _usernameController.text,
+                        fName: _fNameController.text,
+                        lName: _lNameController.text,
+                        password: _passwordController.text,
+                        email: _emailController.text,
+                      );
+                      http.post(
+                        Uri.parse(url),
+                        headers: headers,
+                        body: jsonEncode(createdAcc.toJson()),
+                      );
+                      Navigator.pop(context);
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Unable to check username availability'),
+                      ),
+                    );
+                  }
                 }
               },
               child: const Text('Register'),
