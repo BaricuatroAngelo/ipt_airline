@@ -46,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (matchingUser != null) {
-        // TODO: login successful, navigate to next screen
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const BlankPage()));
       } else {
