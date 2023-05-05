@@ -15,7 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   String? _errorMessage;
@@ -56,15 +55,6 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: AssetImage('Images/airplane.png'),
-                fit: BoxFit.cover
-              )
-            ),
-          ),
           const Text(
             "Airline Reservation System",
             textAlign: TextAlign.center,
@@ -177,6 +167,5 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
 }
 
