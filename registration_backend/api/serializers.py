@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from registration.models import User, Flight, Airline
+from registration.models import User, Flight, Airline, Flights
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,3 +16,8 @@ class AirlineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Airline
         fields = ['airlineID', 'airline_name']
+
+class FlightsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Flights
+        fields = ['tripType', 'countryFrom', 'countryTo', 'departDate', 'returnDate']

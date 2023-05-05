@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from registration.models import User, Flight, Airline
-from .serializers import UserSerializer, FlightSerializer, AirlineSerializer
+from registration.models import User, Flight, Airline, Flights
+from .serializers import UserSerializer, FlightSerializer, AirlineSerializer, FlightsSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -42,6 +42,19 @@ class AirlineList(APIView):
     
     def post(self, request):
         serializer = AirlineSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class FlightsList(APIView):
+    def get(self, request):
+        flights = Flights.objects.all()
+        serializer = FlightsSerializer(flights, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = FlightsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

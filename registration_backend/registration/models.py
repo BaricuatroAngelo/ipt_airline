@@ -23,3 +23,13 @@ class Flight(models.Model):
 class Airline(models.Model):
     airlineID = models.AutoField(primary_key=True)
     airline_name = models.CharField(max_length=300, default='')
+
+class Flights(models.Model):
+    tripType = models.CharField(max_length=255, default='')
+    countryFrom = models.CharField(max_length=255)
+    countryTo = models.CharField(max_length=255)
+    departDate = models.DateField()
+    returnDate = models.DateField()
+
+    def __str__(self):
+        return f"{self.tripType} trip from {self.countryFrom} to {self.countryTo}"
