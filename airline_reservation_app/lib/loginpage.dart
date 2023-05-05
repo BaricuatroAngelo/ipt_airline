@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     if (response.statusCode == 200) {
       final users = jsonDecode(response.body);
       final matchingUser = users.firstWhere(
-            (user) => user['username'] == username && user['password'] == password,
+        (user) => user['username'] == username && user['password'] == password,
         orElse: () => null,
       );
 
@@ -51,10 +51,22 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Container(
+            width: 100,
+            height: 100,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            child: Image.asset(
+              'images/airplane.png',
+              fit: BoxFit.cover,
+            ),
+          ),
           const Text(
             "Airline Reservation System",
             textAlign: TextAlign.center,
@@ -121,8 +133,11 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                gradient:
-                const LinearGradient(colors: [Colors.blue, Colors.green]),
+                gradient: const LinearGradient(colors: [
+                  Color(0xFF192841),
+                  Colors.blue,
+                  Colors.lightBlueAccent
+                ]),
               ),
               child: Center(
                 child: InkWell(
@@ -168,4 +183,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
