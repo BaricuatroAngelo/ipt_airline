@@ -34,11 +34,11 @@ class _BlankPageState extends State<BlankPage> {
       body: screens.elementAt(currentIndex),
       bottomNavigationBar: GNav(
         onTabChange: _navigateBottomBar,
-        backgroundColor: Colors.blue,
-        // rippleColor: Colors.blueAccent,
+        backgroundColor: Colors.transparent,
+        rippleColor: Colors.transparent,
         tabBackgroundGradient: LinearGradient(colors: [
-          Colors.blue,
-          Colors.lightBlueAccent,
+          Colors.transparent,
+          Colors.transparent,
         ], stops: [
           0.5,
           1.1
@@ -47,9 +47,9 @@ class _BlankPageState extends State<BlankPage> {
           GButton(
             icon: Icons.home_sharp,
             text: ' Home',
-            textColor: Colors.white,
-            iconColor: Colors.white54,
-            iconActiveColor: Colors.white54,
+            textColor: Colors.grey,
+            iconColor: Colors.grey,
+            iconActiveColor: Colors.grey,
           ),
           // GButton(
           //   icon: Icons.thumb_up_alt,
@@ -61,9 +61,9 @@ class _BlankPageState extends State<BlankPage> {
           GButton(
             icon: Icons.settings,
             text: ' Settings',
-            textColor: Colors.white,
-            iconColor: Colors.white54,
-            iconActiveColor: Colors.white54,
+            textColor: Colors.grey,
+            iconColor: Colors.grey,
+            iconActiveColor: Colors.grey,
           ),
         ],
       ));

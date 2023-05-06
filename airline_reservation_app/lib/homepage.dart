@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                           bottomRight: Radius.circular(50)),
                       color: Colors.blue),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 50, left: 15),
+                    padding: EdgeInsets.only(top: 65, left: 15),
                     child: Text('Book Your\nFlights Now!', style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
@@ -50,14 +50,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Positioned(
-                  top: 200,
+                  top: 225,
                   right: 20,
                   child: Container(
-                    height: 400,
+                    height: 425,
                     width: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       color: Colors.white,
+                      border: Border.all(color: Colors.black12)
                     ),
                     child: Padding(
                       padding:
@@ -189,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 25,
                           ),
                           GestureDetector(
                             onTap: () {
