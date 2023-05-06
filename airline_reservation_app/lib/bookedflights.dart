@@ -14,6 +14,13 @@ class BookedFlightsPage extends StatefulWidget {
 }
 
 class _BookedFlightsPageState extends State<BookedFlightsPage> {
+  String _generateGateNumber() {
+    final letters = ['A', 'B', 'C', 'D'];
+    final random = Random();
+    final letter = letters[random.nextInt(letters.length)];
+    final number = random.nextInt(5) + 1;
+    return '$letter$number';
+  }
   late Future<List<Flight>> _bookedFlights;
 
   @override
@@ -72,7 +79,7 @@ class _BookedFlightsPageState extends State<BookedFlightsPage> {
                           height: 10,
                         ),
                         Text(
-                            'Gate Number: ${String.fromCharCode(64 + Random().nextInt(4))}-${Random().nextInt(5) + 1}'
+                            'Gate Number: ${_generateGateNumber()}'
                         )
                       ],
                     ),
