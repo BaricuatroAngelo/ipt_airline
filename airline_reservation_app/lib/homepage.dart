@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'dart:convert';
 
@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -229,6 +229,10 @@ class _HomePageState extends State<HomePage> {
                                     .then((response) {
                                   // Print the response body
                                   print(response.body);
+                                  _countryFromController.clear();
+                                  _countryToController.clear();
+                                  _departDateController.clear();
+                                  _returnDateController.clear();
                                 });
                               }
                             },

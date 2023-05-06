@@ -1,5 +1,4 @@
 import 'package:airline_reservation_app/homepage.dart';
-import 'package:airline_reservation_app/loginpage.dart';
 import 'package:airline_reservation_app/settingspage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';

@@ -10,7 +10,7 @@ class BookedFlightsPage extends StatefulWidget {
   const BookedFlightsPage({Key? key}) : super(key: key);
 
   @override
-  _BookedFlightsPageState createState() => _BookedFlightsPageState();
+  State<BookedFlightsPage> createState() => _BookedFlightsPageState();
 }
 
 class _BookedFlightsPageState extends State<BookedFlightsPage> {
