@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 import 'dart:convert';
 import 'account.dart';
 
@@ -20,6 +21,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Registration'),
       ),
@@ -120,7 +122,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       );
                     } else {
+                      String userID = const Uuid().v4();
                       Account createdAcc = Account(
+                        userId: userID,
                         username: _usernameController.text,
                         fName: _fNameController.text,
                         lName: _lNameController.text,

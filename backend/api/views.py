@@ -1,15 +1,12 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from registration.models import User, Flight, Airline, Flights
-from .serializers import UserSerializer, FlightSerializer, AirlineSerializer, FlightsSerializer
-from rest_framework import status
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate
-from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework import status
+from registration.models import User, Airline, Flights
+from .serializers import UserSerializer, AirlineSerializer, FlightSerializer
 
 
 class UserList(APIView):
-    def get(self,request):
+    def get(self, request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
@@ -20,10 +17,25 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class FlightList(APIView):
+
+
+class AirlineList(APIView):
     def get(self, request):
-        flights = Flight.objects.all()
+        airlines = Airline.objects.all()
+        serializer = AirlineSerializer(airlines, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = AirlineSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class FlightsView(APIView):
+    def get(self, request):
+        flights = Flights.objects.all()
         serializer = FlightSerializer(flights, many=True)
         return Response(serializer.data)
 
@@ -33,30 +45,3 @@ class FlightList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class AirlineList(APIView):
-    def get(self, request):
-        airline = Airline.objects.all()
-        serializer = AirlineSerializer(airline, many=True)
-        return Response(serializer.data)
-    
-    def post(self, request):
-        serializer = AirlineSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class FlightsList(APIView):
-    def get(self, request):
-        flights = Flights.objects.all()
-        serializer = FlightsSerializer(flights, many=True)
-        return Response(serializer.data)
-    
-    def post(self, request):
-        serializer = FlightsSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    

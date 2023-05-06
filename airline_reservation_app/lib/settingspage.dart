@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text('Booked Flights'),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const BookedFlights()));
+                    builder: (context) => const BookedFlightsPage()));
               },
             ),
             const Text(
