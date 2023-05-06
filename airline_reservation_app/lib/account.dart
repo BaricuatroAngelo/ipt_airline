@@ -1,4 +1,5 @@
 class Account {
+  final String userId;
   final String username;
   final String password;
   final String fName;
@@ -6,7 +7,8 @@ class Account {
   final String email;
 
   Account(
-      {required this.username,
+      {required this.userId,
+      required this.username,
       required this.password,
       required this.email,
       required this.fName,
@@ -14,6 +16,7 @@ class Account {
 
   factory Account.fromJson(Map<String, dynamic> json) {
     return Account(
+        userId: json['id'],
         username: json['username'],
         fName: json['first_name'],
         lName: json['last_name'],
@@ -22,6 +25,7 @@ class Account {
   }
 
   Map<String, dynamic> toJson() => {
+        'id': userId,
         'username': username,
         'first_name': fName,
         'last_name': lName,

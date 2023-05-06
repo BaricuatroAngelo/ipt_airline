@@ -41,6 +41,7 @@ dependencies:
   country_list_pick: ^1.0.1+6
   paged_vertical_calendar: ^1.1.6
   intl: ^0.18.0
+  uuid: ^3.0.7
   http: ^0.13.5
 
 dev_dependencies:

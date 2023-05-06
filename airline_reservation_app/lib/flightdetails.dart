@@ -22,10 +22,10 @@ class Flight {
   }
 
   Map<String, dynamic> toJson() => {
-    'tripType': tripType,
-    'countryFrom': countryFrom,
-    'countryTo': countryTo,
-    'departDate': departDate,
-    'returnDate': returnDate
-  };
+        'tripType': tripType,
+        'countryFrom': countryFrom,
+        'countryTo': countryTo,
+        'departDate': departDate,
+        'returnDate': returnDate
+      };
 }
